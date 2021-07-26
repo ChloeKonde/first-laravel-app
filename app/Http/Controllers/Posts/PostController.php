@@ -8,6 +8,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use App\Services\PostService;
+use Illuminate\Support\Facades\DB;
 
 
 class PostController extends Controller
@@ -53,6 +54,8 @@ class PostController extends Controller
     }
 
     public function showComments($id) {
-        $post = Post::find($id);
+        return view('comments.showcomments', ['comments' => DB::table('comments')
+                                                                     ->where('post_id', '=', $id)
+                                                                     ->get()]);
     }
 }
