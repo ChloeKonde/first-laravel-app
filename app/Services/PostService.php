@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Http\Request;
 
 
 class PostService
@@ -26,7 +27,7 @@ class PostService
         return Post::find($id);
     }
 
-    public function update(UpdatePostRequest $request, $id) {
+    public function update(Request $request, $id) {
         $post = Post::find($id);
         $post->name = $request['name'];
         $post->description = $request['description'];

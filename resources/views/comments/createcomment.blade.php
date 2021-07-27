@@ -6,7 +6,7 @@
             </a>
         </x-slot>
 
-        <form action="{{route('storecomment')}}" method="POST">
+        <form action="{{route('comments.store')}}" method="POST">
             @csrf
             <div>
                 <x-label for="title" :value="__('Title')" />

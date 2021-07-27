@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CommentService;
+use App\Models\Post;
+use App\Services\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class CommentController extends Controller
+class PostController extends Controller
 {
-    private $commentService;
+    private $postService;
 
     public function __construct()
     {
-        $this->commentService = app(CommentService::class);
+        $this->postService = app(PostService::class);
     }
 
     /**
@@ -20,11 +21,9 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        return view('comments.showcomments', ['comments' => DB::table('comments')
-            ->where('post_id', '=', $id)
-            ->get()]);
+        return view('posts.showposts', ['posts' => Post::all()]);
     }
 
     /**
@@ -32,9 +31,9 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        return view('comments.createcomment', ['post_id' => $id]);
+        return view('posts.createpost');
     }
 
     /**
@@ -45,7 +44,7 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $this->commentService->store($request);
+        $this->postService->store($request->all());
     }
 
     /**
@@ -54,10 +53,10 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+//    public function show()
+//    {
+//        return view('posts.showposts');
+//    }
 
     /**
      * Show the form for editing the specified resource.
@@ -67,7 +66,8 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = $this->postService->edit($id);
+        return view('posts.editpost', ['post' => $post]);
     }
 
     /**
@@ -79,7 +79,10 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $this->authorize('update', $post);
+        $this->postService->update($request, $id);
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -90,6 +93,7 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->postService->destroy($id);
+        return redirect()->back();
     }
 }

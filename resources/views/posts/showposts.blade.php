@@ -9,7 +9,7 @@
             {{ $post['description'] }} <br>
 
             <div>
-                <form action="{{route("deletepost", $post['id'])}}" method="POST">
+                <form action="{{route("posts.destroy", $post['id'])}}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button>
@@ -17,15 +17,15 @@
                     </button>
                 </form>
 
-                <a href="{{route('editpost', $post['id'])}}">
+                <a href="{{route('posts.edit', $post['id'])}}">
                     Edit
-                </a>
+                </a>`
                 <br>
 
-                <a href="{{route('createcomment', $post['id'])}}">
+                <a href="{{route('comments.create', $post['id'])}}">
                     Create comment
                 </a>
-                <a href="{{route('showallcomments', $post['id'])}}">
+                <a href="{{route('comments.index', $post['id'])}}">
                     Show all comments
                 </a>
 

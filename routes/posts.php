@@ -2,7 +2,7 @@
 
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\Posts\PostController;
+use \App\Http\Controllers\PostController;
 
 Route::get("/createpost", [PostController::class, 'create'])
     ->name("createpost");

@@ -6,7 +6,7 @@
             </a>
         </x-slot>
 
-        <form method="POST" action="{{route("createpost")}}">
+        <form method="POST" action="{{route("posts.store")}}">
             @csrf
             <div>
                 <x-label for="name" :value="__('Name')" />
