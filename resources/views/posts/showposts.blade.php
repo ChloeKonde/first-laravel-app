@@ -21,8 +21,12 @@
                     Edit
                 </a>
                 <br>
+
+                <a href="{{route('createcomment', $post['id'])}}">
+                    Create comment
+                </a>
                 <a href="{{route('showallcomments', $post['id'])}}">
-                    Show comments
+                    Show all comments
                 </a>
 
                  <br>

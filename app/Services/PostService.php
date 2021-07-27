@@ -32,8 +32,4 @@ class PostService
         $post->description = $request['description'];
         $post->save();
     }
-
-    public function showComments($id) {
-//
-    }
 }

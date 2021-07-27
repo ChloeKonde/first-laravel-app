@@ -59,3 +59,4 @@ class PostController extends Controller
                                                                      ->get()]);
     }
 }
+
